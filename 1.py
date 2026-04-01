@@ -7,9 +7,7 @@
 from aip import AipNlp
 
 # 百度AI配置（请替换为你的真实信息）
-APP_ID = '122588655'
-API_KEY = 'RaUH0wVOSpNX52hKGJ2dwtKw'
-SECRET_KEY = 'gvP5F9dkQzAKGt44ffmSssxcUnVjwuLk'
+
 
 # 创建客户端
 client = AipNlp(APP_ID, API_KEY, SECRET_KEY)
