@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+"""
+极简地址识别 - 带学号姓名显示
+"""
+
+from aip import AipNlp
+import json
+import os
+
+# ==================== 学生信息 ====================
+STUDENT_ID = "202335020610"  # ← 请修改为你的学号
+STUDENT_NAME = "洪枫"  # ← 请修改为你的姓名
+# ================================================
+
+# ==================== 百度AI配置 ====================
+APP_ID = '122588664'
+API_KEY = 'RcK6ijQBqMJRDyNyhJXqWesK'
+SECRET_KEY = 'xRfEEnMjA9SIrqbiHRvi6IMLnnIjwpQA'
+# ================================================
+
+# 创建客户端
+client = AipNlp(APP_ID, API_KEY, SECRET_KEY)
+
+# 显示程序信息
+print("\n" + "=" * 50)
+print("📍 地址识别程序")
+print("=" * 50)
+print(f"👨‍🎓 学号：{STUDENT_ID}")
+print(f"📚 姓名：{STUDENT_NAME}")
+print("=" * 50 + "\n")
+
+# 输入文本
+text = input("请输入要识别的文本：")
+
+# 识别地址
+try:
+    print("\n🤖 AI正在识别中...")
+    result = client.address(text)
+
+    print("\n" + "=" * 50)
+    print("✨ 识别结果")
+    print("=" * 50)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+
+    # 简洁输出
+    if 'text' in result and result['text']:
+        print("\n" + "=" * 50)
+        print("📍 识别出的地址：")
+        for i, addr in enumerate(result['text'], 1):
+            print(f"  地址{i}: {addr}")
+        print("=" * 50)
+    else:
+        print("\n❌ 未识别出地址信息")
+
+except Exception as e:
+    print(f"\n❌ 识别失败: {e}")
+
+print(f"\n👨‍🎓 学生：{STUDENT_NAME} ({STUDENT_ID})")
+print("程序结束\n")
